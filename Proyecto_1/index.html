@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  
   <div class="video-container">
     <div class="overlay">
       <div class="contenido">
@@ -23,22 +24,37 @@
       </div>
     </div>
 
-    <!--TODO archivo corrupto-->
     <video autoplay muted loop class="video">
-      <source src="./media/multimedia/index_champions2023.mp4" type="video/mp4" />
+      <source src="./media/multimedia/index_intro.mp4" type="video/mp4" />
     </video>
+
+    <button id="scrollButton" style="
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+    border-radius: 50%;
+    background-color: red;
+    border: none;
+  " onclick="scrollDown()"></button>
+
   </div>
 
+
   <div class="others">
-    <h1>Already joined the battle ?</h1>
+    <h1>Already joined the battle?</h1>
     <br />
-    <table style="width:100%">
+    <table>
       <tr>
-        <td style="width:50%; text-align:center;">
+        <td>
+          <h2><a href="./html/teams.html">TEAMS</a></h2>
           <img src="./media/img/index.html_Teams.webp" alt="Teams" style="cursor:pointer; width: 100%;"
             onclick="location.href='./html/teams.html'">
         </td>
-        <td style="width:50%; text-align:center;">
+        <td>
+          <h2><a href="./html/schedule.html">SCHEDULE</a></h2>
           <img src="./media/img/index.html_Schedule.avif" alt="Schedule" style="cursor:pointer; width: 100%;"
             onclick="location.href='./html/schedule.html'">
         </td>
