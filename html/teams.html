@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <link rel="stylesheet" type="text/css" href="../css/teams.css" media="screen">
+    <link href="../media/fonts/Valorant/stylesheet.css" rel="stylesheet">
+    <script src="../js/form.js" defer></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="bloque"><a href="../index.html">
+                <p>Home</p>
+            </a></div>
+        <div class="bloque"><a href="./form.html">
+                <p>Register</p>
+            </a></div>
+        <div class="bloque"><a href="./schedule.html">
+                <p>Schedule</p>
+            </a></div>
+    </div>
+
+    <br>
+    <center>
+        <h1>
+            TEAMS:
+        </h1>
+        <br>
+        <p id="text" style="text-align: center;">
+        </p>
+    </center>
+
+    <script>
+        var url_pagina = window.location;
+
+        var parametros = new URLSearchParams(url_pagina.search);
+
+        var team = parametros.get("team_name");
+        var player1 = parametros.get("player1_name");
+        var player1_rank = parametros.get("player1_rank");
+        var player2 = parametros.get("player2_name");
+        var player2_rank = parametros.get("player2_rank");
+        var player3 = parametros.get("player3_name");
+        var player3_rank = parametros.get("player3_rank");
+        var player4 = parametros.get("player4_name");
+        var player4_rank = parametros.get("player4_rank");
+        var player5 = parametros.get("player5_name");
+        var player5_rank = parametros.get("player5_rank");
+        var player6 = parametros.get("player6_name");
+        var player6_rank = parametros.get("player6_rank");
+        var player7 = parametros.get("player7_name");
+        var player7_rank = parametros.get("player7_rank");
+
+        var text = document.getElementById("text");
+
+        text.innerHTML = team;
+        text.innerHTML += ": " + player1 + " (Leader) - " + player1_rank;
+        text.innerHTML += ", " + player2 + " - " + player2_rank;
+        text.innerHTML += ", " + player3 + " - " + player3_rank;
+        text.innerHTML += ", " + player4 + " - " + player4_rank;
+        text.innerHTML += ", " + player5 + " - " + player5_rank;
+        text.innerHTML += ", " + player6 + " - " + player6_rank;
+        text.innerHTML += ", " + player7 + " - " + player7_rank;
+    </script>
+
+</body>
+
+</html>

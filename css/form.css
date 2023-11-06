@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+    color: rgb(255, 255, 255);
+    font-family: 'VALORANT';
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 0.3em;
+    margin-left: 0.3em;
+}
+
+p {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: justify;
+}
+
+.navbar {
+    font-family: 'VALORANT', sans-serif;
+    text-align: center;
+    background: #f40000;
+}
+
+.bloque {
+    font-size: 1.56em;
+    padding: 0.2em;
+    display: inline-block;
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+.bloque p {
+    color: aliceblue
+}
+
+.bloque a {
+    text-decoration: none;
+}
+
+body,
+html {
+    background-color: black;
+    color: aliceblue;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+form {
+    background-color: #646161;
+    border-radius: 10px;
+    padding: 20px;
+    width: 48%;
+    margin: auto;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+}
+
+input[type="text"],
+select {
+    width: calc(100% - 1em);
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 2em;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: black;
+    font-family: 'VALORANT';
+}

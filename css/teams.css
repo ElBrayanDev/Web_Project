@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'VALORANT', sans-serif;
+    color: aliceblue;
+}
+
+body {
+    background-color: #000000;
+    color: #333;
+}
+
+.navbar {
+    text-align: center;
+    background: #f40000;
+}
+
+.bloque {
+    font-size: 1.56em;
+    padding: 0.2em;
+    display: inline-block;
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+.bloque p {
+    font-family: 'VALORANT', sans-serif;
+    color: aliceblue
+}
+
+.bloque a {
+    text-decoration: none;
+}
+
+#text {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
