@@ -133,5 +133,8 @@ function closeNav() {
 function closeRightNav() {
   document.getElementById("myRightSidenav").style.width = "0";
 }
-document.querySelector('.closebtn').addEventListener('click', closeNav);
-document.querySelector('.closebtn2').addEventListener('click', closeRightNav);
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelector('.closebtn').addEventListener('click', closeNav);
+  document.querySelector('.closebtn2').addEventListener('click', closeRightNav);
+});
