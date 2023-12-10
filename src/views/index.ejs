@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/index.css" media="screen" />
+    <title>Valorant Mayhem Masters</title>
+    <link href="./media/fonts/Valorant/stylesheet.css" rel="stylesheet" />
+    <script src="./js/index.js"></script>
+</head>
+
+<body>
+
+    <div class="video-container">
+        <button id="loginBtn" class="login-button">Login</button>
+        <button id="registerBtn" class="register-button">Register</button>
+        <div class="overlay">
+            <div class="contenido">
+                <div>
+                    <h1>Valorant Mayhem Masters</h1>
+                    <center><a href="/inscription"><button class="join-button">Join the arena</button></a></center>
+                </div>
+            </div>
+        </div>
+
+
+        <!--* Add side navigation bar for LOGIN -->
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <form id="loginForm" class="login-form">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br>
+                <input type="submit" value="Login">
+            </form>
+            <!-- This is showed if user is already loged-->
+            <button id="logoutBtn" class="logout-button" style="display: none;">Logout</button>
+        </div>
+
+
+        <!--! Add side navigation bar for REGISTER -->
+
+        <div id="myRightSidenav" class="myRightSidenav">
+            <a href="javascript:void(0)" class="closebtn2" onclick="closeRightNav()">&times;</a>
+            <form id="registerForm" class="register-form" action="/register" method="post">
+                <label for="regUsername">Username:</label><br>
+                <input type="text" id="regUsername" name="username" required><br>
+                <label for="regEmail">Email:</label><br>
+                <input type="email" id="regEmail" name="email" required><br>
+                <label for="regPassword">Password:</label><br>
+                <input type="password" id="regPassword" name="password" required><br>
+                <label for="confirmPassword">Confirm Password:</label><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+                <button type="submit" class="SignUp" id="SignUp">Sign Up</button>
+            </form>
+        </div>
+
+        <video autoplay muted loop class="video">
+            <source src="./media/multimedia/index_intro.mp4" type="video/mp4" />
+        </video>
+
+        <button id="scrollButton" class="scroll-button" onclick="scrollDown()">&#8595;</button>
+
+    </div>
+
+
+    <div class="others">
+        <h1>Already joined the battle?</h1>
+        <br />
+        <table>
+            <tr>
+                <td>
+                    <h2><a href="/teams">TEAMS</a></h2>
+                    <img src="./media/img/index.html_Teams.webp" alt="Teams" style="cursor:pointer; width: 100%;"
+                        onclick="location.href='/teams'">
+                </td>
+                <td>
+                    <h2><a href="/schedules">SCHEDULE</a></h2>
+                    <img src="./media/img/index.html_Schedule.jpg" alt="Schedule" style="cursor:pointer; width: 100%;"
+                        onclick="location.href='/schedules'">
+                </td>
+            </tr>
+        </table>
+        <br /><br /><br />
+    </div>
+
+    <div class="about-us">
+        <h3>About Us</h3>
+        <br />
+        <p>
+            Please note that this website is a project developed as part of a
+            university web development course and has no official affiliation with
+            Riot Games or Valorant. Our mission is to create an engaging online
+            platform for Valorant enthusiasts and players. We're passionate about
+            web development and esports, and this project serves as a showcase of
+            our skills and dedication to the craft. It's important to emphasize that
+            this website is not associated with Riot Games, the creators of
+            Valorant, in any way. We do not claim any endorsement or official status
+            from Riot Games. Furthermore, our website is purely educational and has
+            no commercial purposes. We do not sell any products or services, and any
+            use of Valorant-related materials is for educational and informational
+            purposes only. We hope you enjoy your visit to our Valorant Tournament
+            webpage and appreciate the effort and creativity we've put into its
+            development. If you have any feedback or questions, please feel free to
+            contact us. Thank you for your support!
+        </p>
+        <br>
+        <footer>&copy; 2023 Valorant Mayhem Masters</footer>
+    </div>
+</body>
+
+</html>
