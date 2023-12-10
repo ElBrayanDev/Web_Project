@@ -1,0 +1,22 @@
+{
+  "name": "web_project",
+  "version": "1.0.0",
+  "description": "Brayan Barrera - 2220097\r # commit Avance 2:\r El proyecto tiene como proposito ser una página para la creación de un torneo del videouego Valorant,\r el landing page o index.html permite registrar un usuario, hacer login, registrar un equipo al torneo, ver los equipos creados y el cronograma de partidas.\r El registro y login se despliegan a partir de dos nav bar laterales, el registro redirige a una nueva pagina, donde se pregunta por el nombre del equipo,\r nombres y rangos de los 7 integrantes del equipo. Al llenar el formulario se redirige a la pagina de equipos para visualizar la informacion registrada.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.35.1"
+  }
+}

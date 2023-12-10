@@ -5,37 +5,48 @@ function scrollDown() {
 window.onload = function () {
   // JavaScript code to handle login and logout
   document.getElementById('loginBtn').addEventListener('click', openNav);
-  document.getElementById('loginForm').addEventListener('submit', function (e) {
+  document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Get the username from the form
+    // Get the username and password from the form
     var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
-    // Store the username in localStorage
-    localStorage.setItem('username', username);
+    // Send a POST request to the /auth/login route
+    const response = await fetch('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
 
-    // Redirect back to this page
-    window.location.href = 'index.html';
+
+    //TODO 1: Check if the response is ok
+    if (response.ok) {
+      // Login successful
+      const user = await response.json();
+      console.log('Logged in as:', user.username);
+
+      // Store the username in localStorage
+      localStorage.setItem('username', username);
+
+      // Update the login button with the username
+      document.getElementById('loginBtn').textContent = username;
+
+      // Show the logout button
+      document.getElementById('logoutBtn').style.display = 'block';
+
+      // Hide the login form
+      document.getElementById('loginForm').style.display = 'none';
+
+      // Display the username
+      var usernameDisplay = document.createElement('p');
+      usernameDisplay.textContent = 'Logged in as ' + username;
+      document.body.appendChild(usernameDisplay);
+    } else {
+      // Login failed
+      console.log('Invalid credentials');
+    }
   });
-
-  // Check if a user is logged in
-  var username = localStorage.getItem('username');
-  if (username) {
-    // Update the login button with the username
-    document.getElementById('loginBtn').textContent = username;
-
-    // Show the logout button
-    document.getElementById('logoutBtn').style.display = 'block';
-
-    // Hide the login form
-    document.getElementById('loginForm').style.display = 'none';
-
-    // Display the username
-    var usernameDisplay = document.createElement('p');
-    usernameDisplay.className = 'username-display'; // Add a class
-    usernameDisplay.innerHTML = 'Logged in as: <br> <br>' + username;
-    document.getElementById('mySidenav').appendChild(usernameDisplay);
-  }
 
   // Add a click event listener to the logout button
   document.getElementById('logoutBtn').addEventListener('click', function () {
@@ -58,8 +69,7 @@ window.onload = function () {
     }
   }
 
-  //! THIS IS NEW
-
+  //! Register Nav bar
   document.getElementById('registerBtn').addEventListener('click', openRightNav);
 
   function openRightNav() {
@@ -74,57 +84,6 @@ window.onload = function () {
       document.body.removeEventListener('click', closeRightNav);
     }
   }
-
-  document.getElementById('registerForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // Get the user data from the form
-    var username = document.getElementById('regUsername').value;
-    var email = document.getElementById('regEmail').value;
-    var password = document.getElementById('regPassword').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-
-    // Check if the passwords match
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-
-    // Store the user data in localStorage in JSON format
-    var userData = {
-      username: username,
-      email: email,
-      password: password
-    };
-    localStorage.setItem('userData', JSON.stringify(userData));
-
-    // Redirect back to this page
-    window.location.href = 'index.html';
-  });
-
-}
-
-/*
-function handleLogin(e) {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  localStorage.setItem('username', username);
-  localStorage.setItem('password', password);
-  location.reload();
-}*/
-
-if (localStorage.getItem('username')) {
-  document.getElementById('loginBtn').innerText = localStorage.getItem('username');
-  // Add logout button to the navigation bar
-  const logoutBtn = document.createElement('button');
-  logoutBtn.innerText = 'Logout';
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('password');
-    location.reload();
-  });
-  document.getElementById('mySidenav').appendChild(logoutBtn);
 }
 
 function closeNav() {
