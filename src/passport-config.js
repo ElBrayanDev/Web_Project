@@ -26,10 +26,28 @@ function initializePassport(passport) {
     passport.use(new LocalStrategy({ usernameField: 'username' }, authenticateUser));
 
     passport.serializeUser((user, done) => done(null, user.id));
+    const cache = require('memory-cache');
+
     passport.deserializeUser((id, done) => {
-        User.findByPk(id)
-            .then(user => done(null, user))
-            .catch(done);
+        // Try to get the user data from the cache
+        const user = cache.get(id);
+
+        if (user) {
+            // If the user data is in the cache, use it
+            done(null, user);
+        } else {
+            // If the user data is not in the cache, get it from the database
+            User.findByPk(id)
+                .then(user => {
+                    // Store the user data in the cache for future requests
+                    cache.put(id, user);
+
+                    done(null, user);
+                })
+                .catch(err => {
+                    return done(err);
+                });
+        }
     });
 }
 

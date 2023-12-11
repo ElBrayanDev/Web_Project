@@ -42,6 +42,11 @@
                     <p>Welcome, <%= user.username %>
                     </p>
                     <button id="logoutBtn" class="logout-button">Logout</button>
+                    <script>
+                        document.getElementById('logoutBtn').addEventListener('click', function () {
+                            window.location.href = '/logout';
+                        });
+                    </script>
                     <% } %>
         </div>
 

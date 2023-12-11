@@ -48,7 +48,7 @@ app.use(express.static(__dirname + '/public'));
 
 // * Login
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/teams',
+    successRedirect: '/index',
     successFlash: 'You are now logged in!',
     failureRedirect: '/index',
     failureFlash: true
@@ -59,8 +59,16 @@ app.get('/index', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+    req.session.destroy(err => {
+        if (err) {
+            // handle error
+            console.log(err);
+            res.redirect('/index');
+        } else {
+            // session destroyed
+            res.redirect('/index');
+        }
+    });
 });
 
 // ! Register
