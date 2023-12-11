@@ -1,44 +1,47 @@
 //! Combo Box
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    const ranks = [
-        'Radiant',
-        'Immortal 3',
-        'Immortal 2',
-        'Immortal 1',
-        'Ascendant 3',
-        'Ascendant 2',
-        'Ascendant 1',
-        'Diamond 3',
-        'Diamond 2',
-        'Diamond 1',
-        'Platinum 3',
-        'Platinum 2',
-        'Platinum 1',
-        'Gold 3',
-        'Gold 2',
-        'Gold 1',
-        'Silver 3',
-        'Silver 2',
-        'Silver 1',
-        'Bronze 3',
-        'Bronze 2',
-        'Bronze 1',
-        'Iron 3',
-        'Iron 2',
-        'Iron 1'
-    ];
+    const ranks = {
+        'Radiant': '2500',
+        'Immortal 3': '2400',
+        'Immortal 2': '2300',
+        'Immortal 1': '2200',
+        'Ascendant 3': '2100',
+        'Ascendant 2': '2000',
+        'Ascendant 1': '1900',
+        'Diamond 3': '1800',
+        'Diamond 2': '1700',
+        'Diamond 1': '1600',
+        'Platinum 3': '1500',
+        'Platinum 2': '1400',
+        'Platinum 1': '1300',
+        'Gold 3': '1200',
+        'Gold 2': '1100',
+        'Gold 1': '1000',
+        'Silver 3': '900',
+        'Silver 2': '800',
+        'Silver 1': '700',
+        'Bronze 3': '600',
+        'Bronze 2': '500',
+        'Bronze 1': '400',
+        'Iron 3': '300',
+        'Iron 2': '200',
+        'Iron 1': '100'
+    };
 
-    const selectBoxes = document.querySelectorAll('.rank-select');
+    const rankSelects = document.getElementsByClassName('rank-select');
 
-    selectBoxes.forEach(selectBox => {
-        ranks.forEach(rank => {
-            const option = document.createElement('option');
-            option.value = rank;
-            option.text = rank;
-            selectBox.appendChild(option);
-        });
-    });
+    for (const rankName in ranks) {
+        const rankId = ranks[rankName];
+        const option = document.createElement('option');
+        option.value = rankId;
+        option.text = rankName;
+
+        for (let i = 0; i < rankSelects.length; i++) {
+            const select = rankSelects[i];
+            select.appendChild(option.cloneNode(true));
+        }
+    }
 });
 
 //! Form submission
@@ -86,5 +89,5 @@ document.getElementById('form').addEventListener('submit', function (e) {
 
     localStorage.setItem('teamData', JSON.stringify(formData));
 
-    window.location.href = './teams.html';
+    window.location.href = '/teams';
 });

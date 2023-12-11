@@ -26,7 +26,7 @@
     <h1 style="font-size: 3em;">
         <center>Team Registration</center>
     </h1><br>
-    <form method="get" action="./teams.html" id="form">
+    <form method="post" action="/form" id="form">
         <center>
             <table>
                 <tr>
@@ -53,7 +53,7 @@
                     <td>
                         <div>
                             <label for="player1_rank" style="display: block;">Rank: </label>
-                            <select id="player1_rank" name="player1_rank" class="rank-select">
+                            <select id="rank-select" name="player1_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -68,7 +68,7 @@
                     <td>
                         <div>
                             <label for="player2_rank" style="display: block;">Rank: </label>
-                            <select id="player2_rank" name="player2_rank" class="rank-select">
+                            <select id="rank-select" name="player2_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -83,7 +83,7 @@
                     <td>
                         <div>
                             <label for="player3_rank" style="display: block;">Rank: </label>
-                            <select id="player3_rank" name="player3_rank" class="rank-select">
+                            <select id="rank-select" name="player3_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -98,7 +98,7 @@
                     <td>
                         <div>
                             <label for="player4_rank" style="display: block;">Rank: </label>
-                            <select id="player4_rank" name="player4_rank" class="rank-select">
+                            <select id="rank-select" name="player4_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -113,7 +113,7 @@
                     <td>
                         <div>
                             <label for="player5_rank" style="display: block;">Rank: </label>
-                            <select id="player5_rank" name="player5_rank" class="rank-select">
+                            <select id="rank-select" name="player5_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -128,7 +128,7 @@
                     <td>
                         <div>
                             <label for="player6_rank" style="display: block;">Rank: </label>
-                            <select id="player6_rank" name="player6_rank" class="rank-select">
+                            <select id="rank-select" name="player6_rank" class="rank-select">
                             </select>
                         </div>
                     </td>
@@ -143,9 +143,30 @@
                     <td>
                         <div>
                             <label for="player7_rank" style="display: block;">Rank: </label>
-                            <select id="player7_rank" name="player7_rank" class="rank-select">
+                            <select id="rank-select" name="player7_rank" class="rank-select">
                             </select>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <label for="region_label">Region: </label>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <select id="region" name="region">
+                                <option value="Asia - Pacific">Asia - Pacific</option>
+                                <option value="North America">North America</option>
+                                <option value="Latin America">Latin America</option>
+                                <option value="Europe">Europe</option>
+                                <option value="Korea">Korea</option>
+                                <option value="Brazil">Brazil</option>
+                            </select>
+                        </center>
                     </td>
                 </tr>
             </table>
