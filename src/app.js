@@ -325,6 +325,21 @@ app.post('/deleteteams', async (req, res) => {
     }
 });
 
+// * Schedule
+
+app.get('/schedules', async (req, res) => {
+    // Query the database to get two teams with the same idregion and iddivision
+    const teamsResult = await pool.query(
+        'SELECT t1.nombreteam AS team1, t2.nombreteam AS team2, d.nombre AS division, r.nombre AS region FROM team t1 JOIN team t2 ON t1.idregion = t2.idregion AND t1.iddivision = t2.iddivision JOIN region r ON t1.idregion = r.id JOIN division d ON t1.iddivision = d.id WHERE t1.id < t2.id'
+    );
+
+    // Convert the rows from the query to an array of matches
+    const matches = teamsResult.rows;
+
+    // Render the schedules view with the matches
+    res.render('schedules', { matches: matches });
+});
+
 //@ Routes
 
 app.get('/index', (req, res) => {

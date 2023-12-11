@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/form.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/teams.css" media="screen">
     <link href="../media/fonts/Valorant/stylesheet.css" rel="stylesheet">
     <title>Schedule</title>
 </head>
@@ -23,14 +23,13 @@
             </a></div>
     </div>
     <br>
-    <p> La idea de esta pagina es agendar los distintos enfrentamientos entre los equipos
-        Y finalmente hacer la visualizacion de ellos mediante 'tournament brackets'
-        para ello necesito poder guardar los nombres de los equipos registrados y poder usarlos en esta pagina,
-        necesitaria una base de datos</p>
-
-
-    <br>
-    <p> Suavecitos vs KRU: Noviembre 25 de 2023</p>
+    <center>
+        <% matches.forEach(match=> { %>
+            <p id="text" style="text-align: center;">
+                <%= match.team1 %> vs <%= match.team2 %> - Division: <%= match.division %> - Region: <%= match.region %>
+            </p>
+            <% }) %>
+    </center>
 </body>
 
 </html>
