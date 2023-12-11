@@ -269,7 +269,61 @@ app.post('/editteams', async (req, res) => {
 
 // ! DELETE TEAM
 
+app.get('/deleteteams', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('You must be logged in to delete your teams.');
+    }
 
+    const user = req.user;
+
+    // Query the database to get the teams that the logged-in user is a part of
+    const userTeamsResult = await pool.query(
+        'SELECT team.* FROM team JOIN player ON team.id = player.idteam WHERE player.nombre = $1',
+        [user.username]
+    );
+
+    // Convert the rows from the second query to an array of team objects
+    const userTeams = userTeamsResult.rows;
+
+    // Render the delete teams view with the user's teams
+    res.render('deleteteams', { teams: userTeams });
+});
+
+app.post('/deleteteams', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('You must be logged in to delete your teams.');
+    }
+
+    const user = req.user;
+    const teamId = parseInt(req.body.id, 10);
+
+    // Begin a transaction
+    await pool.query('BEGIN');
+
+    try {
+        // Delete the player rows that reference the team
+        await pool.query(
+            'DELETE FROM player WHERE idteam = $1',
+            [teamId]
+        );
+
+        // Delete the team
+        await pool.query(
+            'DELETE FROM team WHERE id = $1',
+            [teamId]
+        );
+
+        // Commit the transaction
+        await pool.query('COMMIT');
+
+        // Redirect to a success page
+        res.redirect('/teams');
+    } catch (error) {
+        // If an error occurred, rollback the transaction
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
 
 //@ Routes
 

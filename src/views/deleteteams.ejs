@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/teams.css" media="screen">
     <link href="../media/fonts/Valorant/stylesheet.css" rel="stylesheet">
-    <title>Edit Teams</title>
+    <title>Delete Teams</title>
 </head>
 
 <body>
@@ -23,13 +23,12 @@
     </div>
 
     <% teams.forEach(team=> { %>
-        <form action="/editteams" method="POST">
+        <form action="/deleteteams" method="POST">
             <input type="hidden" name="id" value="<%= team.id %>">
             <label for="nombreteam" style="color: white;">
                 <%= team.nombreteam %>:
             </label>
-            <input type="text" id="nombreteam" name="nombreteam" value="<%= team.nombreteam %>">
-            <button type="submit">Save Changes</button>
+            <button type="submit">Delete Team</button>
         </form>
         <% }) %>
 </body>
