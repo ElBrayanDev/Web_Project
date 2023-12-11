@@ -8,5 +8,6 @@ router
     .post('/', userController.create)
     .put('/:id', userController.update)
     .delete('/:id', userController._delete);
+    
 
 module.exports = router;

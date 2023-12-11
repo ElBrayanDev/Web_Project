@@ -30,17 +30,20 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <form id="loginForm" class="login-form">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password"><br>
-                <input type="submit" value="Login">
-            </form>
-            <!-- This is showed if user is already loged-->
-            <button id="logoutBtn" class="logout-button" style="display: none;">Logout</button>
+            <% if (!user) { %>
+                <form id="loginForm" class="login-form" action="/login" method="post">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password"><br>
+                    <input type="submit" value="Login">
+                </form>
+                <% } else { %>
+                    <p>Welcome, <%= user.username %>
+                    </p>
+                    <button id="logoutBtn" class="logout-button">Logout</button>
+                    <% } %>
         </div>
-
 
         <!--! Add side navigation bar for REGISTER -->
 

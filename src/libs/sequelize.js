@@ -10,6 +10,7 @@ const sequelize = new Sequelize(
     {
         host: config.dbHost,
         dialect: 'postgresql',
+        
     }
 );
 

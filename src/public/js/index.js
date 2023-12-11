@@ -17,13 +17,6 @@ window.onload = function () {
   });
 
   //* Add a click event listener to the logout button
-  document.getElementById('logoutBtn').addEventListener('click', function () {
-    // Remove the username from localStorage
-    localStorage.removeItem('username');
-
-    // Refresh the page
-    location.reload();
-  });
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.body.addEventListener('click', closeNav);

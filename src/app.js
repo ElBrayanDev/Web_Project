@@ -1,28 +1,69 @@
+require('dotenv').config();
+
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path'); //! new
 const routerApi = require('./routes');
-const bcrypt = require('bcrypt'); // crypt password
 
+const bcrypt = require('bcrypt'); // crypt password
 const { User, UserSchema } = require('./db/models/user.model');
 const sequelize = require('./libs/sequelize');
 User.init(UserSchema, User.config(sequelize));
 
+const passport = require('passport');
+const initializePassport = require('./passport-config');
+const flash = require('express-flash');
+const session = require('express-session');
+
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
+
+initializePassport(
+    passport,
+    async username => await User.findOne({ where: { username: username } }),
+    async id => await User.findByPk(id)
+);
 
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // Dont save if nothing is modified
+    saveUninitialized: false // Dont save empty value in session
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 
+// * Login
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/teams',
+    successFlash: 'You are now logged in!',
+    failureRedirect: '/index',
+    failureFlash: true
+}));
 
+app.get('/index', (req, res) => {
+    res.render('index', { user: req.user });
+});
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
+// ! Register
 app.post("/register", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
