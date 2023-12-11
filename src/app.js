@@ -228,16 +228,48 @@ app.get('/editteams', async (req, res) => {
 
     // Query the database to get the teams that the logged-in user is a part of
     const userTeamsResult = await pool.query(
-        'SELECT team.id FROM team JOIN player ON team.id = player.idteam WHERE player.nombre = $1',
+        'SELECT team.* FROM team JOIN player ON team.id = player.idteam WHERE player.nombre = $1',
         [user.username]
     );
 
-    // Convert the rows from the second query to an array of team ids
-    const userTeamIds = userTeamsResult.rows.map(row => row.id);
+    // Convert the rows from the second query to an array of team objects
+    const userTeams = userTeamsResult.rows;
 
     // Render the edit teams view with the user's teams
-    res.render('editteams', { teams: userTeamIds });
+    res.render('editteams', { teams: userTeams });
 });
+
+// * EDIT TEAMS/:id
+
+app.post('/editteams', async (req, res) => {
+    console.log(req.body);
+    if (!req.user) {
+        return res.status(401).send('You must be logged in to edit your teams.');
+    }
+
+    const user = req.user;
+    const newTeamName = req.body.nombreteam;
+
+    // Get the team ID from the database
+    const teamIdResult = await pool.query(
+        'SELECT idteam FROM player WHERE nombre = $1',
+        [user.username]
+    );
+    const teamId = teamIdResult.rows[0].idteam;
+
+    // Update the team in the database
+    await pool.query(
+        'UPDATE team SET nombreteam = $1 WHERE id = $2',
+        [newTeamName, teamId]
+    );
+
+    // Redirect to a success page
+    res.redirect('/teams');
+});
+
+// ! DELETE TEAM
+
+
 
 //@ Routes
 
