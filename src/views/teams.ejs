@@ -29,6 +29,14 @@
         <h1>
             TEAMS:
         </h1>
+        <div class="button-container">
+            <form action="/myteams" method="POST">
+                <button type="submit" id="myteams" nombre="myteams">My Teams</button>
+            </form>
+            <form action="/teams" method="GET">
+                <button type="submit">All Teams</button>
+            </form>
+        </div>
         <br>
         <% teams.forEach(team=> { %>
             <p id="text" style="text-align: center;">

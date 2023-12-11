@@ -48,6 +48,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 
+app.use(express.urlencoded({ extended: true }));
+
 // * Login
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/index',
@@ -153,6 +155,44 @@ app.post('/form', async (req, res) => {
         // Redirect to a success page
         res.redirect('/teams');
     });
+});
+
+// * My team
+
+app.post('/myteams', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('You must be logged in to view your teams.');
+    }
+
+    const user = req.user;
+
+    // Query the database to get all the teams and their players
+    const allTeamsResult = await pool.query(
+        `SELECT team.id, team.nombreteam, team.idregion, array_agg(player.nombre) as players
+    FROM team 
+    JOIN player ON team.id = player.idteam 
+    GROUP BY team.id, team.nombreteam, team.idregion`
+    );
+
+    // Query the database to get the teams that the logged-in user is a part of
+    const userTeamsResult = await pool.query(
+        'SELECT team.id FROM team JOIN player ON team.id = player.idteam WHERE player.nombre = $1',
+        [user.username]
+    );
+
+    // Convert the rows from the second query to an array of team ids
+    const userTeamIds = userTeamsResult.rows.map(row => row.id);
+
+    // Check if the user is part of any teams
+    if (userTeamIds.length === 0) {
+        return res.send('You are not part of any teams. <a href="/inscription">Register a team</a>');
+    }
+
+    // Filter the teams from the first query to only include the teams that the logged-in user is a part of
+    const myTeams = allTeamsResult.rows.filter(team => userTeamIds.includes(team.id));
+
+    // Render the teams view with the filtered teams
+    res.render('teams', { teams: myTeams });
 });
 
 //@ Routes
