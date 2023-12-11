@@ -157,6 +157,28 @@ app.post('/form', async (req, res) => {
     });
 });
 
+// * All teams
+
+app.get('/teams', async (req, res) => {
+    const teamQuery = 'SELECT * FROM Team';
+    const playerQuery = 'SELECT * FROM Player WHERE idteam = $1';
+
+    try {
+        const teamResult = await pool.query(teamQuery);
+        const teams = teamResult.rows;
+
+        for (const team of teams) {
+            const playerResult = await pool.query(playerQuery, [team.id]);
+            team.players = playerResult.rows.map(player => player.nombre);
+        }
+
+        res.render('teams', { teams });
+    } catch (err) {
+        console.error(err);
+        res.redirect('/index');
+    }
+});
+
 // * My team
 
 app.post('/myteams', async (req, res) => {
@@ -195,6 +217,28 @@ app.post('/myteams', async (req, res) => {
     res.render('teams', { teams: myTeams });
 });
 
+// * Edit My teams
+
+app.get('/editteams', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('You must be logged in to edit your teams.');
+    }
+
+    const user = req.user;
+
+    // Query the database to get the teams that the logged-in user is a part of
+    const userTeamsResult = await pool.query(
+        'SELECT team.id FROM team JOIN player ON team.id = player.idteam WHERE player.nombre = $1',
+        [user.username]
+    );
+
+    // Convert the rows from the second query to an array of team ids
+    const userTeamIds = userTeamsResult.rows.map(row => row.id);
+
+    // Render the edit teams view with the user's teams
+    res.render('editteams', { teams: userTeamIds });
+});
+
 //@ Routes
 
 app.get('/index', (req, res) => {
@@ -209,25 +253,7 @@ app.get('/schedules', (req, res) => {
     res.render('schedule.ejs')
 });
 
-app.get('/teams', async (req, res) => {
-    const teamQuery = 'SELECT * FROM Team';
-    const playerQuery = 'SELECT * FROM Player WHERE idteam = $1';
 
-    try {
-        const teamResult = await pool.query(teamQuery);
-        const teams = teamResult.rows;
-
-        for (const team of teams) {
-            const playerResult = await pool.query(playerQuery, [team.id]);
-            team.players = playerResult.rows.map(player => player.nombre);
-        }
-
-        res.render('teams', { teams });
-    } catch (err) {
-        console.error(err);
-        res.redirect('/index');
-    }
-});
 //@ End Routes
 
 routerApi(app);
